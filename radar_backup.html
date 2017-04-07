@@ -119,7 +119,6 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     });
   
     console.log("jsonArray.length is: " + jsonArray.length);
-   console.log("again, data[0] is: " + data[0]);
 
     var jdict = d3.nest()
                 .key(function(d) { return d.schoolName; })
