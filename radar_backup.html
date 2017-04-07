@@ -102,9 +102,20 @@ var data = [
   
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
-    csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var flatJson = d3.csv(csv); // parse csv string into json
-    console.log(flatJson.length, flatJson);
+//     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
+    var flatJson = d3.csv(csv, function(d) {
+      return {
+        schoolName : d.university_name,
+        teaching : d.teaching,
+        international : d.international,
+        research : d.research, 
+        income : d.income 
+      };
+    }, function(data) {
+      console.log(data[0]);
+    });
+//     var flatJson = d3.csv(csv); // parse csv string into json
+//     console.log(flatJson.length, flatJson);
 //     console.log("Before Nest, json[0]: " + flatJson[0]);
     var json = d3.nest()
                 .key(function(d) { return d.university_name; })
