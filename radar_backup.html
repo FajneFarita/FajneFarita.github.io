@@ -103,7 +103,7 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
 //     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var json = d3.csv(csv, function(d) {
+    var jsonArray = d3.csv(csv, function(d) {
       return {
         schoolName : d.university_name,
         axes : [
@@ -126,7 +126,7 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     // reshape json data
     var data = [];
     var keys = []; // track unique keys (university names)
-    json.forEach(function(record) {
+    jsonArray.forEach(function(record) {
       console.log("Record : " + record);
       var key = record.schoolName;
       console.log("Found key: " + key);
@@ -149,7 +149,7 @@ function csv2json(csv, selectedKeys, selectedAxes) {
         }
       });
     });
-    // var data = flatJson; 
+    // var data = jsonArray; 
     return data;
   }
 
