@@ -231,6 +231,8 @@ function DrawRadarChart(containingElement, data) {
 var filteredData = csv2json("timesData_orig.csv", 
                             ["Harvard University", "Stanford University", "Duke University"], 
                             ["teaching", "international", "research", "income", "world rank"]); 
+console.log("filtered json data: "); 
+console.log(filteredData); 
 DrawRadarChart(".chart-container", filteredData) ;
 
 </script>
