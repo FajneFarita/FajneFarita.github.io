@@ -103,7 +103,11 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var json = d3.csv.parse(csv); // parse csv string into json
+    d3.csv(csv, function(data) {
+      console.log(data[0]);
+    });
+  
+    // var json = d3.csv.parse(csv); // parse csv string into json
     // reshape json data
 //     var data = [];
 //     var keys = []; // track unique keys (university names)
