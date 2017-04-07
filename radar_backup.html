@@ -127,18 +127,18 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     var data = [];
     var keys = []; // track unique keys (university names)
     json.forEach(function(record) {
-      console.log("Record : " + record)
+      console.log("Record : " + record);
       var key = record.schoolName;
-      console.log("Found key: " + key)
+      console.log("Found key: " + key);
       if (selectedKeys.indexOf(key) >= 0) {
-        console.log("Found key from selected keys: " + key)
+        console.log("Found key from selected keys: " + key);
         if (keys.indexOf(key) < 0) {
           keys.push(key); // push to unique keys tracking
           data.push({ // push new node in data
             schoolName: key,
             axes: [] // initially empty 
           });
-        }};
+        }}
       data.forEach(function(d) {
         if (d.schoolName === key ) { // push record data into right group in data, selected axes (columns) only 
 //            && selectedAxes.indexOf(record.axis) >= 0
