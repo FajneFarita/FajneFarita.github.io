@@ -104,7 +104,7 @@ var data = [
 function csv2json(csv, selectedKeys, selectedAxes) {
     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
     var flatJson = d3.csv(csv); // parse csv string into json
-    console.log("Before Nest, json[0]: " + JSON.stringify(flatJson[0]));
+    console.log("Before Nest, json[0]: " + flatJson[0]);
     var json = d3.nest()
                 .key(function(d) { return d.university_name; })
                 .entries(flatJson);
