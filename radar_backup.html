@@ -105,25 +105,31 @@ function csv2json(csv, selectedKeys, selectedAxes) {
 //     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
     var jsonArray = [];
     d3.text(csv, function(text) {
-      d3.csv.parse(csv, function(d) {
+      var data = d3.csv.parse(csv, function(d) {
         var dd = {
           schoolName : d.university_name,
           axes : [
             {axis : "teaching", value : parseFloat(d.teaching)},
             {axis : "international", value : parseFloat(d.international)},
-            {axis : "research", value : parseFloat(d.research)}, 
-            {axis : "income", value : parseFloat(d.income)}, 
-            {axis : "world_rank", value : parseInt(d.world_rank)} 
+            {axis : "research", value : parseFloat(d.research)},
+            {axis : "income", value : parseFloat(d.income)},
+            {axis : "world_rank", value : parseInt(d.world_rank)}
           ]
         };
-        jsonArray.push(dd); 
-        return dd; 
-      }, function(data) {
-  //        jsonArray = JSON.parse(JSON.stringify(data))
-         console.log("data[0] is: ")
-         console.log(data[0]); 
-      })
+        jsonArray.push(dd); // global var
+        return dd;
+      }
+      // , function(data) {
+      //    console.log("data[0] is: ")
+      //    console.log(data[0]);
+      // }
+      );
+      console.log("data[0] is: ");
+      console.log(data[0]);
+      console.log("jsonArray[0] is: ");
+      console.log(jsonArray[0]); 
     });
+
   
     console.log("jsonArray.length is: " + jsonArray.length);
 
