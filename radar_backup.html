@@ -103,7 +103,7 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    d3.csv(csv, function(data) {
+    var json = d3.csv(csv, function(data) {
       console.log(data[0]);
     });
   
