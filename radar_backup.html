@@ -116,6 +116,8 @@ function csv2json(csv, selectedKeys, selectedAxes) {
             {axis : "world_rank", value : parseInt(d.world_rank)}
           ]
         };
+        console.log("dd is: ")
+        console.log(dd); 
         jsonArray.push(dd); // global var
         return dd;
       }
