@@ -109,15 +109,13 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     var keys = []; // track unique keys (university names)
     json.forEach(function(record) {
       var key = record.university_name;
-      if (selectedKeys.indexOf(key) < 0) {
-        continue;  // skip it 
-      }
-      if (keys.indexOf(key) < 0) {
-        keys.push(key); // push to unique keys tracking
-        data.push({ // push new node in data
-          schoolName: key,
-          axes: [] // initially empty 
-        });
+      if (selectedKeys.indexOf(key) >= 0) {
+        if (keys.indexOf(key) < 0) {
+          keys.push(key); // push to unique keys tracking
+          data.push({ // push new node in data
+            schoolName: key,
+            axes: [] // initially empty 
+          }});
       };
       data.forEach(function(d) {
         if (d.schoolName === record.university_name
