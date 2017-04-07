@@ -106,8 +106,8 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     var flatJson = d3.csv(csv, function(d) {
       return {
         schoolName : d.university_name,
-        teaching : d.teaching,
-        international : d.international,
+        teaching : parseFloat(d.teaching),
+        international : parseInt(d.international),
         research : d.research, 
         income : d.income, 
         world_rank : d.world_rank 
@@ -119,9 +119,9 @@ function csv2json(csv, selectedKeys, selectedAxes) {
 //     console.log(flatJson.length, flatJson);
 //     console.log("Before Nest, json[0]: " + flatJson[0]);
     var json = d3.nest()
-                .key(function(d) { return d.university_name; })
+                .key(function(d) { return d.schoolName; })
                 .entries(flatJson);
-    console.log("After Nest: " + JSON.stringify(json));
+    console.log("After Nest: " + json[0]);
     // reshape json data
 //     var data = [];
 //     var keys = []; // track unique keys (university names)
