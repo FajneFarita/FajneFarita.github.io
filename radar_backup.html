@@ -98,9 +98,41 @@ var data = [
 
 <div class="chart-container"></div>
 <script>
+  
+// helper function csv2json to return json data from csv
+function csv2json(csv, selectedKeys, selectedAxes) {
+    csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
+    var json = d3.csv.parse(csv); // parse csv string into json
+    // reshape json data
+    var data = [];
+    var keys = []; // track unique keys (university names)
+    json.forEach(function(record) {
+      var key = record.university_name;
+      if (selectedKeys.indexOf(key) < 0) {
+        continue;  // skip it 
+      }
+      if (keys.indexOf(key) < 0) {
+        keys.push(key); // push to unique keys tracking
+        data.push({ // push new node in data
+          schoolName: key,
+          axes: [] // initially empty 
+        });
+      };
+      data.forEach(function(d) {
+        if (d.schoolName === record.university_name
+           && selectedAxes.indexOf(record.axis) >= 0) { // push record data into right group in data, selected axes (columns) only 
+          d.axes.push({
+            axis: record.axis,
+            value: parseFloat(record.value)
+          });
+        }
+      });
+    });
+    return data;
+  }
 
-
-//legend 
+  
+  
 function DrawRadarChart(containingElement, data) {
   /////////////////////////////////////////////////////////
   //////////// Create the container SVG and g /////////////
@@ -196,7 +228,9 @@ function DrawRadarChart(containingElement, data) {
   
 }
 
-
-DrawRadarChart(".chart-container", data) ;
+var filteredData = csv2json("timesData_orig.csv", 
+                            ["Harvard University", "Stanford University", "Duke University"], 
+                            ["teaching", "international", "research", "income", "world rank"]); 
+DrawRadarChart(".chart-container", filteredData) ;
 
 </script>
