@@ -103,7 +103,7 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
 //     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var jsonArray = [];
+    var jsonArray = 
     d3.csv(csv, function(d) {
       return {
         schoolName : d.university_name,
@@ -116,9 +116,9 @@ function csv2json(csv, selectedKeys, selectedAxes) {
         ]
       };
     }, function(data) {
-//        jsonArray = data; 
-       jsonArray = JSON.parse(JSON.stringify(data))
+//        jsonArray = JSON.parse(JSON.stringify(data))
        console.log("data[0] is: " + jsonArray[0]);
+       return data; 
     });
   
     console.log("jsonArray.length is: " + jsonArray.length);
