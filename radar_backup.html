@@ -140,7 +140,7 @@ function csv2json(csv, selectedKeys, selectedAxes) {
           });
         }};
       data.forEach(function(d) {
-        if (d.schoolName === record.schoolName
+        if (d.schoolName === key
 //            && selectedAxes.indexOf(record.axis) >= 0
            ) { // push record data into right group in data, selected axes (columns) only 
           d.axes.push({
