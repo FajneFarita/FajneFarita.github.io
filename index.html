@@ -137,7 +137,7 @@
 
      function year_change(year){
 
-      var y = 'new' + year + '.csv';
+      var y = 'docs/new' + year + '.csv';
     // load csv file and create the chart
     d3.csv(y, function(data) {
     var firstCell = data.map(function(d){return d3.values(d)[0]});
