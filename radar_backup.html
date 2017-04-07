@@ -103,7 +103,7 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
 //     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var flatJson = d3.csv(csv, function(d) {
+    var json = d3.csv(csv, function(d) {
       return {
         schoolName : d.university_name,
         axes : [
@@ -117,42 +117,40 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     }, function(data) {
       console.log(data[0]);
     });
-//     var flatJson = d3.csv(csv); // parse csv string into json
-//     console.log(flatJson.length, flatJson);
-//     console.log("Before Nest, json[0]: " + flatJson[0]);
+
 //     var jdict = d3.nest()
 //                 .key(function(d) { return d.schoolName; })
-//                 .entries(flatJson);
+//                 .entries(json);
 //     console.log("After Nest: " + jdict);
+  
     // reshape json data
-//     var data = [];
-//     var keys = []; // track unique keys (university names)
-//     json.forEach(function(record) {
-//       console.log("Record : " + record)
-      
-//       var key = record.university_name;
-//       console.log("Found key: " + key)
-//       if (selectedKeys.indexOf(key) >= 0) {
-//         console.log("Found key from selected keys: " + key)
-//         if (keys.indexOf(key) < 0) {
-//           keys.push(key); // push to unique keys tracking
-//           data.push({ // push new node in data
-//             schoolName: key,
-//             axes: [] // initially empty 
-//           });
-//         }};
-//       data.forEach(function(d) {
-//         if (d.schoolName === record.university_name
-// //            && selectedAxes.indexOf(record.axis) >= 0
-//            ) { // push record data into right group in data, selected axes (columns) only 
-//           d.axes.push({
-//             axis: record.axis,
-//             value: parseFloat(record.value)
-//           });
-//         }
-//       });
-//     });
-    var data = flatJson; 
+    var data = [];
+    var keys = []; // track unique keys (university names)
+    json.forEach(function(record) {
+      console.log("Record : " + record)
+      var key = record.schoolName;
+      console.log("Found key: " + key)
+      if (selectedKeys.indexOf(key) >= 0) {
+        console.log("Found key from selected keys: " + key)
+        if (keys.indexOf(key) < 0) {
+          keys.push(key); // push to unique keys tracking
+          data.push({ // push new node in data
+            schoolName: key,
+            axes: [] // initially empty 
+          });
+        }};
+      data.forEach(function(d) {
+        if (d.schoolName === record.schoolName
+//            && selectedAxes.indexOf(record.axis) >= 0
+           ) { // push record data into right group in data, selected axes (columns) only 
+          d.axes.push({
+            axis: record.axis,
+            value: record.value
+          });
+        }
+      });
+    });
+    // var data = flatJson; 
     return data;
   }
 
