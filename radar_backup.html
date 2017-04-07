@@ -115,8 +115,8 @@ function csv2json(csv, selectedKeys, selectedAxes) {
           data.push({ // push new node in data
             schoolName: key,
             axes: [] // initially empty 
-          }});
-      };
+          });
+        }};
       data.forEach(function(d) {
         if (d.schoolName === record.university_name
            && selectedAxes.indexOf(record.axis) >= 0) { // push record data into right group in data, selected axes (columns) only 
