@@ -103,11 +103,10 @@ var data = [
 // helper function csv2json to return json data from csv
 function csv2json(csv, selectedKeys, selectedAxes) {
     csv = csv.replace(/, /g, ","); // trim leading whitespace in csv file
-    var json = d3.csv(csv, function(data) {
-      console.log(data[0]);
-    });
-  
-    // var json = d3.csv.parse(csv); // parse csv string into json
+    var flatJson = d3.csv(csv); // parse csv string into json
+    var json = d3.nest()
+                .key(function(d) { return d.university_name; })
+                .entries(flatJson);
     // reshape json data
 //     var data = [];
 //     var keys = []; // track unique keys (university names)
@@ -127,7 +126,8 @@ function csv2json(csv, selectedKeys, selectedAxes) {
 //         }};
 //       data.forEach(function(d) {
 //         if (d.schoolName === record.university_name
-//            && selectedAxes.indexOf(record.axis) >= 0) { // push record data into right group in data, selected axes (columns) only 
+// //            && selectedAxes.indexOf(record.axis) >= 0
+//            ) { // push record data into right group in data, selected axes (columns) only 
 //           d.axes.push({
 //             axis: record.axis,
 //             value: parseFloat(record.value)
