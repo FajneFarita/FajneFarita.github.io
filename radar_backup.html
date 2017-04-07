@@ -115,13 +115,16 @@ function csv2json(csv, selectedKeys, selectedAxes) {
         ]
       };
     }, function(data) {
-      console.log(data[0]);
+      console.log("data[0] is: " + data[0]);
     });
+  
+    console.log("jsonArray[0] is: " + jsonArray[0]);
+   console.log("again, data[0] is: " + data[0]);
 
-//     var jdict = d3.nest()
-//                 .key(function(d) { return d.schoolName; })
-//                 .entries(json);
-//     console.log("After Nest: " + jdict);
+    var jdict = d3.nest()
+                .key(function(d) { return d.schoolName; })
+                .entries(jsonArray);
+    console.log("After Nest: " + jdict);
   
     // reshape json data
     var data = [];
