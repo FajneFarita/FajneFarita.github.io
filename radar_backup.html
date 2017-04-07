@@ -106,11 +106,13 @@ function csv2json(csv, selectedKeys, selectedAxes) {
     var flatJson = d3.csv(csv, function(d) {
       return {
         schoolName : d.university_name,
-        teaching : parseFloat(d.teaching),
-        international : parseFloat(d.international),
-        research : parseFloat(d.research), 
-        income : parseFloat(d.income), 
-        world_rank : parseInt(d.world_rank) 
+        axes : [
+          {axis : "teaching", value : parseFloat(d.teaching)},
+          {axis : "international", value : parseFloat(d.international)},
+          {axis : "research", value : parseFloat(d.research)}, 
+          {axis : "income", value : parseFloat(d.income)}, 
+          {axis : "world_rank", value : parseInt(d.world_rank)} 
+        ]
       };
     }, function(data) {
       console.log(data[0]);
@@ -118,10 +120,10 @@ function csv2json(csv, selectedKeys, selectedAxes) {
 //     var flatJson = d3.csv(csv); // parse csv string into json
 //     console.log(flatJson.length, flatJson);
 //     console.log("Before Nest, json[0]: " + flatJson[0]);
-    var jdict = d3.nest()
-                .key(function(d) { return d.schoolName; })
-                .entries(flatJson);
-    console.log("After Nest: " + jdict);
+//     var jdict = d3.nest()
+//                 .key(function(d) { return d.schoolName; })
+//                 .entries(flatJson);
+//     console.log("After Nest: " + jdict);
     // reshape json data
 //     var data = [];
 //     var keys = []; // track unique keys (university names)
@@ -150,7 +152,7 @@ function csv2json(csv, selectedKeys, selectedAxes) {
 //         }
 //       });
 //     });
-    var data = jdict; 
+    var data = flatJson; 
     return data;
   }
 
